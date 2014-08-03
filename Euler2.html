@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function compute(){
+	var limit = document.getElementById("num").value;
+    var locMult = [0];
+	 var getFibonacci = function() {
+     	
+     	var sumMult = 0;
+     	var lastNum = 1;
+     	var lastLastNum = 0;
+
+     	while (lastNum < 4000000) {
+     		var nextNum = lastNum + lastLastNum;
+     		lastLastNum = lastNum;
+     		lastNum = nextNum;
+
+     		if (nextNum<4000000) { 		
+     			locMult.push(nextNum); 
+     		};  		
+     	}
+     	
+     	for(i=0;i<locMult.length;i++) {
+     		if ( locMult[i] % 2 === 0) {
+     			sumMult = sumMult + locMult[i];
+     		}
+     	}
+     	return sumMult;
+     }
+
+    document.getElementById("Sum").innerHTML = "Sum: " + getFibonacci();
+    document.getElementById("Series").innerHTML = "Series: " + locMult;
+}
+
+</script>
+</head>
+<body>
+
+<div>Enter a number below:</div>
+<input type="text" id="num"> </input>
+<button onclick="compute()">Compute</button>
+<div id="Sum">Sum:</div>
+<div id="Series">Series:</div>
+</body>
+</html>

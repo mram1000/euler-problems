@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+function compute(){
+	var userNum = document.getElementById("num").value;
+	var sqRoot = Math.round(parseFloat(Math.sqrt(userNum)));
+    var primeFactors = [];//[3,5,7,11,13,17,19];
+    var factors = [];
+    var intArray = [];
+    var answer;
+	
+	//Fill intArray with odd nums only
+	for (var p = 2; p < sqRoot; p++) {
+	// 	//check if not div by 2 - then add to intArray
+		if (p%2!==0) {
+			intArray.push(p);
+		}
+	 }
+
+	 getFactors();
+	 //find all factors
+	function getFactors() {
+		//iterate 
+		i = 0;
+		for(i=intArray.length;i>=0;i--) {
+			if(userNum%intArray[i]===0) {
+				//divisible - a factor - add it to array
+				factors.push(intArray[i]);
+				//get multiplier and add it too
+				factors.push(userNum/intArray[i]);
+			}
+		}
+		factors.sort(function(a, b){return a-b});
+		i = 0;
+		for(i=factors.length-1;i>=0;i--) {
+			if (isPrime(factors[i])) {
+				answer = factors[i];
+				return;
+			}
+		}
+	}
+	//check if each factor is a prime
+	function isPrime(num){
+		//loop and find if divisible
+		primeInd = true;
+		for(x=2;x<num/2;x++) {
+			if(num%x===0) {
+				primeInd = false;
+				return;
+			}
+		}
+		return primeInd;
+	}
+
+   
+
+	
+    document.getElementById("Answer").innerHTML = "Answer: " + answer;
+    //Math.max.apply(Math, primeFactors);
+     document.getElementById("Series").innerHTML = "Factors: " + factors;
+}
+   
+
+</script>
+</head>
+<body>
+
+<div>Enter a number below:</div>
+<input type="text" id="num"> </input>
+<button onclick="compute()">Compute</button>
+<div id="Answer">Sum:</div>
+<div id="Series">Series:</div>
+
+</body>
+</html>
